@@ -482,7 +482,7 @@ if [ $doInstall == 1 ]; then
 	if git clone --depth=1 https://github.com/MagicMirrorOrg/MagicMirror.git; then
 		echo -e "\e[92mCloning MagicMirror Done!\e[0m" | tee -a $logfile
 		# replace faulty run-start.sh
-		curl -sL https://raw.githubusercontent.com/sdetweil/MagicMirror_scripts/master/run-start.sh >MagicMirror/run-start.sh
+		curl -sL https://raw.githubusercontent.com/Tortuga-AM/MagicMirrorCustomOS/refs/heads/main/Installation/run-start.sh >MagicMirror/run-start.sh
 		chmod +x MagicMirror/run-start.sh
 		sudo touch /etc/chromium-browser/customizations/01-disable-update-check 2>/dev/null;echo CHROMIUM_FLAGS=\"\$\{CHROMIUM_FLAGS\} --check-for-update-interval=31536000\" | sudo tee /etc/chromium-browser/customizations/01-disable-update-check >/dev/null 2>&1
 	else
@@ -612,9 +612,10 @@ if command_exists plymouth; then
 		if [ ! -d ~/MagicMirror/splashscreen ]; then
 			mkdir ~/MagicMirror/splashscreen
 			cd ~/MagicMirror/splashscreen
-			curl -sL https://raw.githubusercontent.com/sdetweil/MagicMirror_scripts/master/splash.png >splash.png
-			curl -sL https://raw.githubusercontent.com/sdetweil/MagicMirror_scripts/master/MagicMirror.plymouth >MagicMirror.plymouth
-			curl -sL https://raw.githubusercontent.com/sdetweil/MagicMirror_scripts/master/MagicMirror.script >MagicMirror.script
+			curl -sL https://raw.githubusercontent.com/Tortuga-AM/MagicMirrorCustomOS/main/splashscreen/splash.png >splash.png
+			curl -sL https://raw.githubusercontent.com/Tortuga-AM/MagicMirrorCustomOS/refs/heads/main/splashscreen/MagicMirror.plymouth >MagicMirror.plymouth
+			curl -sL https://raw.githubusercontent.com/Tortuga-AM/MagicMirrorCustomOS/refs/heads/main/splashscreen/MagicMirror.script >MagicMirror.script
+			curl -sL https://raw.githubusercontent.com/Tortuga-AM/MagicMirrorCustomOS/main/splashscreen/splash_halt.png >splash_halt.png
 			cd - >/dev/null
 		fi
 		if sudo cp ~/MagicMirror/splashscreen/splash.png $THEME_DIR/MagicMirror/splash.png && sudo cp ~/MagicMirror/splashscreen/MagicMirror.plymouth $THEME_DIR/MagicMirror/MagicMirror.plymouth && sudo cp ~/MagicMirror/splashscreen/MagicMirror.script $THEME_DIR/MagicMirror/MagicMirror.script; then
@@ -932,10 +933,10 @@ if [[ $choice =~ ^[Yy]$ ]]; then
 		echo "configure the pm2 config file for MagicMirror" >>$logfile
 		# if the files we need aren't here, get them
 		if [ ! -e installers/pm2_MagicMirror.json ]; then
-			curl -sL https://raw.githubusercontent.com/sdetweil/MagicMirror_scripts/master/pm2_MagicMirror.json >installers/pm2_MagicMirror.json
+			curl -sL https://raw.githubusercontent.com/Tortuga-AM/MagicMirrorCustomOS/refs/heads/main/Configs/pm2_MagicMirror.json >installers/pm2_MagicMirror.json
 		fi
 		if [ ! -e installers/mm.sh ]; then
-			curl -sl https://raw.githubusercontent.com/sdetweil/MagicMirror_scripts/master/mm.sh >installers/mm.sh
+			curl -sl https://raw.githubusercontent.com/Tortuga-AM/MagicMirrorCustomOS/refs/heads/main/mm.sh >installers/mm.sh
 			chmod +x installers/mm.sh
 		fi
 		read -p "Do you want to update the PM2 process name? (Default is MagicMirror)  (y/N)" updateName
